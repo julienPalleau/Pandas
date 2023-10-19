@@ -1,0 +1,21 @@
+# https://www.youtube.com/watch?v=ZyhVh-qRZPA&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=1
+# Python Pandas Tutorial (Part 1): Getting Started with Data Analysis - Installation and Loading Data
+
+import pandas as pd
+
+pd.options.display.width = 0
+pd.options.display.max_colwidth = 200
+pd.set_option('display.width', 1000)
+pd.set_option('display.max_column', 85)
+pd.set_option('display.max_rows', 85)
+
+df = pd.read_csv('data/survey_results_public.csv')
+print(df.shape)  # give us the number of lines and columns
+print(df.info())  # gives us number of lines and columns but also the detail of each columns and their data types
+
+schema_df = pd.read_csv('data/survey_results_schema.csv')
+print(schema_df)
+
+print(schema_df.head())  # gives the first 5 rows
+print(schema_df.head(10))  # gives us the first 10 rows
+print(schema_df.tail(10))  # gives us the last 10 rows
