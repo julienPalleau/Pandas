@@ -1,9 +1,10 @@
 # https://www.youtube.com/watch?v=zmdjNSmRXF4&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=2
 # Python Pandas Tutorial (Part2): DataFrame and Series Basics - Selecting Rows and Columns
 
-#############
-# Chapter 1 #
-#############
+################
+# Chapter 1    #
+# Introduction #
+################
 
 import pandas as pd
 
@@ -20,9 +21,9 @@ print(df.head())
 print(df.tail(10))
 print(schema_df)
 
-#############
-# Chapter 2 #
-#############
+###############
+# Chapter 2   #
+###############
 
 # Creation of a DataFrame from a dictionary
 people = {
@@ -110,52 +111,6 @@ print(df.loc[0:2, 'Hobbyist'])
 print("\n")
 print(f"Let's do it again but with slicing columns as well:\n{df.loc[0:2, 'Hobbyist': 'Employment']}")
 
-#############
-# Chapter 3 #
-#############
-df = pd.DataFrame(people)
-print(df)
 
-# If i want to view all the email addresses
-print("\n")
-print(f"If i want to view all the email addresses:\n {df['email']}")
 
-# What if we wanted to set the email addresses as indexes?
-print("\n")
-df.set_index('email', inplace=True)
-print(f"What if we wanted to set the email addresses as indexes?:\n {df}")
 
-print("\n")
-print(df.loc['CoreyMSchafer@gmail.com', 'last'])
-
-# After we changed the index if we try
-# df.loc[0] it will fail
-# df.iloc[0] still work as expected
-# If we set_index and want to reset it:
-df.reset_index(inplace=True)
-print(f"we can see that index has been reseted {df}")
-
-# Let's set the index when loading the data file:
-print("\n")
-df = pd.read_csv('data/survey_results_public.csv', index_col='Respondent')
-schema_df = pd.read_csv('data/survey_results_schema.csv', index_col='Column')
-print(f"we can see that we have Respondent column as index:\n{df.head()}")
-
-# Let's have a look at our schema:
-print("\n")
-print(f"df schema:\n {schema_df}")
-
-# What if we want to know what a column means without printing the all schema?
-print("\n")
-print(f"What if we want to know what a column means without printing the all schema?:\n{schema_df.loc['MgrIdiot', 'QuestionText']}")
-print(f"Sort the index alphabetically:\n{schema_df.sort_index()}")
-print("\n")
-print(f"Sort the index alphabetically in descending order:\n{schema_df.sort_index(ascending=False)}")
-
-# Above the DF hasn't been modified. If we want the DF to be modified:
-schema_df.sort_index(inplace=True)
-print(f"Above the DF hasn't been modified. If we want the DF to be modified: schema_df.sort_index(inplace=True)\n{schema_df}")
-
-#############
-# Chapter 4 #
-#############
