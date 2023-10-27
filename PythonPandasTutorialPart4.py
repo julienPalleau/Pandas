@@ -1,4 +1,9 @@
-# https://www.youtube.com/watch?v=Lw2rlcxScZY&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=5
+# https://www.youtube.com/watch?v=Lw2rlcxScZY&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=4
+
+#############################################################
+# Chapter 4                                                 #
+# Filtering - Using Conditionals to Filter Rows and Columns #
+#############################################################
 
 import pandas as pd
 
@@ -9,10 +14,6 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.width', 1000)
 
-#############################################################
-# Chapter 4                                                 #
-# Filtering - Using Conditionals to Filter Rows and Columns #
-#############################################################
 people = {
     "first": ["Corey", "Jane", "John"],
     "last": ["Schafer", "Doe", "Doe"],

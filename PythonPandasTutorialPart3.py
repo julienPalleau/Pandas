@@ -1,6 +1,9 @@
-#############
-# Chapter 3 #
-#############
+# https://www.youtube.com/watch?v=W9XjRYFkkyw&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=3
+
+################################################
+# Chapter 3                                    #
+# Indexes - How to Set, Reset, and Use Indexes #
+################################################
 
 import pandas as pd
 

@@ -1,5 +1,8 @@
 # https://www.youtube.com/watch?v=ZyhVh-qRZPA&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=1
-# Python Pandas Tutorial (Part 1): Getting Started with Data Analysis - Installation and Loading Data
+######################################################################
+# Chapter 1                                 #
+# Getting Started with Data Analysis - Installation and Loading Data #
+######################################################################
 
 import pandas as pd
 

@@ -1,10 +1,10 @@
 # https://www.youtube.com/watch?v=zmdjNSmRXF4&list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS&index=2
 # Python Pandas Tutorial (Part2): DataFrame and Series Basics - Selecting Rows and Columns
 
-################
-# Chapter 1    #
-# Introduction #
-################
+############################################################
+# Chapter 2                                                #
+# DataFrame and Series Basics - Selecting Rows and Columns #
+############################################################
 
 import pandas as pd
 
