@@ -10,9 +10,11 @@ import pandas as pd
 df = pd.read_csv('data/survey_results_public.csv')
 schema_df = pd.read_csv('data/survey_results_schema.csv')
 
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.width', 1000)
+pd.options.display.max_columns = 0
+pd.set_option('display.max_columns', 3000)
+pd.set_option('display.max_rows', 3000)
+
+
 
 people = {
     "first": ["Corey", "Jane", "John"],
