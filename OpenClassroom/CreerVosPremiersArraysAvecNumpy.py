@@ -75,7 +75,7 @@ print(f"Calculer la somme revenus_array.sum(): {revenus_array.sum()}")
 
 # Exercice
 print("\n\n")
-print(""" Exercice: \n
+print(""" Exercice 1: \n
 Créez vos premiers arrays avec Numpy
 
 Tout au long de ce cours, nous allons nous mettre dans la peau d’une personne travaillant dans un service data au sein d'une banque. Plus précisément, vous travaillez pour la 
@@ -97,9 +97,6 @@ revenus[revenus == 1400] = 1600
 print(f"Salaire apres augmentation: {revenus[revenus==1600]}")
 # ou
 # np.where(revenus == 1400) retourne une liste d'index auxquelles on trouve 1400, tandis que np.where(revenus == 1400)[0][0] retourne le premier index ou l'on trouve 1400
-indice = np.where(revenus == 1400)[0][0]
-revenus[indice] += 200
-print(revenus[indice])
-
-# Transformez vos donnees en tableaux
-# Creez un tableu avec NumPy
+# indice = np.where(revenus == 1400)[0][0]
+# revenus[indice] += 200
+# print(revenus[indice])
