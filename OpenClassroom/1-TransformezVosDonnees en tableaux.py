@@ -3,7 +3,10 @@
 import numpy as np
 
 # Transformez vos donnees en tableaux
-# Creez un tableu avec NumPy
+
+##############################
+# Creez un tableu avec NumPy #
+##############################
 
 # un tableau de 3x5 rempli de 1
 print(f"un tableau de 3x5 rempli de 1 np.ones((3, 5)): \n{np.ones((3, 5))}")
@@ -17,7 +20,14 @@ print(f"un tableau de 6x3 rempli de valeurs aléatoires comprises entre 0 et 1 n
 # un tableau de 3x3 rempli de valeurs aléatoires entières, comprises entre 1 et 10
 print(f"un tableau de 3x3 rempli de valeurs aléatoires entières, comprises entre 1 et 10 np.random.randint(1, 10, size=(3, 3)): \n{np.random.randint(1, 10, size=(3, 3))}")
 
-# Maitrisez les manipulations avancees d'array
+#########################################################
+# Decouvrez l'analogie entre les arrays et les matrices #
+#########################################################
+# https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857032-transformez-vos-donnees-en-tableaux#/id/r-7856976
+
+################################################
+# Maitrisez les manipulations avancees d'array #
+################################################
 hugo = [1300, 400, 23]
 richard = [1700, 560, 24]
 emilie = [2500, 900, 30]

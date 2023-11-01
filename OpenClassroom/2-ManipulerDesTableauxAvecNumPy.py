@@ -153,6 +153,3 @@ Nous avons ici un tableau composé de 3 tableaux de 2 lignes et 2 colonnes (le p
 
 L’écriture  b[b > 10]  aurait pu être valide, mais elle ne l’est pas à cause du signe "strictement supérieur". Ainsi, elle ne sélectionne que 11, 12 et 13.
 """
-
-
-
