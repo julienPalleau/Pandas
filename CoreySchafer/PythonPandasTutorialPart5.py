@@ -13,6 +13,9 @@ people = {
 
 import pandas as pd
 
+pd.set_option('display.max_columns', 1000, 'display.width', None, 'display.max_rows', 1000)
+# If the line is truncated you can use your pandas pd.to_string() to get the full line
+
 df = pd.DataFrame(people)
 
 pd.set_option('display.max_columns', 500)

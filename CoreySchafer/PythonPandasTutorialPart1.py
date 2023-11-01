@@ -6,11 +6,8 @@
 
 import pandas as pd
 
-pd.options.display.width = 0
-pd.options.display.max_colwidth = 200
-pd.set_option('display.width', 1000)
-pd.set_option('display.max_column', 85)
-pd.set_option('display.max_rows', 85)
+pd.set_option('display.max_columns', 1000, 'display.width', None, 'display.max_rows', 1000)
+# If the line is truncated you can use your pandas pd.to_string() to get the full line
 
 df = pd.read_csv('data/survey_results_public.csv')
 print(df.shape)  # give us the number of lines and columns

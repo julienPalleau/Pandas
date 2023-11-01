@@ -7,19 +7,19 @@
 ############################################################
 
 import pandas as pd
+pd.set_option('display.max_columns', 1000, 'display.width', None, 'display.max_rows', 1000)
+# If the line is truncated you can use your pandas pd.to_string() to get the full line
+
 
 df = pd.read_csv('data/survey_results_public.csv')
 schema_df = pd.read_csv('data/survey_results_schema.csv')
 
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.width', 1000)
 
 print(df.head())
 print(df.head(5))
 print(df.head())
 print(df.tail(10))
-print(schema_df)
+print(schema_df.to_string())
 
 ###############
 # Chapter 2   #
@@ -109,7 +109,7 @@ print(df.loc[0:2, 'Hobbyist'])
 
 # Let's do it again but with slicing columns as well
 print("\n")
-print(f"Let's do it again but with slicing columns as well:\n{df.loc[0:2, 'Hobbyist': 'Employment']}")
+print(f"Let's do it again but with slicing columns as well:\n{df.loc[0:2, 'Hobbyist': 'Employment'].to_string()}")
 
 
 
