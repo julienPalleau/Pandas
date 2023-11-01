@@ -1,6 +1,8 @@
 # https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857178-creez-votre-premier-data-frame-avec-pandas
 import pandas as pd
 
+pd.set_option('display.max_columns', 1000, 'display.width', 1000, 'display.max_rows', 1000)
+
 # Chargement du fichier
 data = pd.read_csv("clients.csv")
 

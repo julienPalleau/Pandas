@@ -64,8 +64,8 @@ print(f"Si j'execute data['nom'] = 1 cela aura deux effets : cela va modifier la
       f"et cela transforme également le type de la variable: \n{data['nom']}")
 
 # Par exemple, si je souhaite modifier la colonne identifiant par elle-même multipliée par 100, je peux le faire de la façon suivante :
-data['identifiant'] = data['identifiant']*100
-print(f"si je souhaite modifier la colonne identifiant par elle-même multipliée par 100 data['identifiant']*100: \n{data['identifiant']*100}")
+data['identifiant'] = data['identifiant'] * 100
+print(f"si je souhaite modifier la colonne identifiant par elle-même multipliée par 100 data['identifiant']*100: \n{data['identifiant'] * 100}")
 # Je peux aussi décider de la remplacer par des valeurs aléatoires entre 1 et 1 000 :
 print("\n")
 data['identifiant'] = np.random.randint(1, 1000, data.shape[0])
@@ -142,7 +142,7 @@ trier selon l'identifiant, par ordre croissant avec data.sort_values('identifian
 print(data.sort_values('identifiant'))
 
 print("trier selon l’identifiant par ordre décroissant data.sort_values('identifiant', ascending = False):")
-print(data.sort_values('identifiant', ascending = False))
+print(data.sort_values('identifiant', ascending=False))
 
 print("trier selon le genre puis le nom, par ordre croissant data.sort_values(['genre', 'nom']):")
 print(data.sort_values(['genre', 'nom']))
@@ -155,7 +155,95 @@ data.sort_values(['genre', 'nom'], ascending=[True, False])
 """)
 print(data.sort_values(['genre', 'nom'], ascending=[True, False]))
 
-
 ############
 # Exercice #
 ############
+"""
+Manipulez un dataframe
+
+Nous allons travailler à présent sur notre fichier de prêts immobiliers.
+
+Pour expliquer rapidement ce fichier, chaque ligne correspond à un prêt qui a été accordé à un de nos clients. Chaque client est identifié par… son identifiant ! Nous avons les 
+informations suivantes :
+
+    la ville et le code postale de l’agence où le client a contracté le prêt
+    le revenu mensuel du client
+    les mensualités remboursées par le client
+    la durée du prêt contracté, en nombre de mois
+    le type de prêt
+    et enfin le taux d’intérêt
+
+Votre rôle cette fois ci va être de modifier ce jeu de données pour calculer différentes variables nécessaires pour identifier les clients qui sont à la limite de leur capacité de 
+remboursement et déterminer les bénéfices réalisées par la banque.
+"""
+import numpy as np
+import pandas as pd
+
+"""
+Commençons par importer notre fichier csv. Celui ci sera disponible via un lien, pour faciliter le bon fonctionnement avec Google Colab, mais promis, c'est le même fichier que 
+celui que vous pouvez télécharger sur le lien suivant (click droit, enregistrer sous)
+"""
+prets = pd.read_csv("https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv")
+print(prets.head())
+
+print("\n")
+pd.set_option('display.max_columns', 1000, 'display.width', 1000, 'display.max_rows', 1000)
+print(data.head())
+
+"""
+Dans un premier temps, créez une nouvelle variable calculant le taux d'endettement de chaque individu. Ce taux correspond au pourcentage du revenu remboursé chaque mois par un 
+individu. Vous arrondirez le résultat à 2 chiffres après la virgule :
+"""
+taux_endettement = round((prets['remboursement']) / (prets['revenu']) * 100, 2)
+# print(taux_endettement)
+
+"""
+Pour éviter toute confusion, renommez la variable taux en taux_interet :
+"""
+prets.rename(columns={'taux': 'taux_interets'})
+
+"""
+Nous allons à présent créer deux dernières variables :
+
+    cout_total correspondant au cout total du pret à partir du remboursement et de la duree
+    benefices correspondant aux bénéfices mensuels réalisés par la banque sur le prêt
+
+Nous simplifierons ici le calcul des bénéfices par :
+
+bénéfices = (C∗T)/24
+
+avec :
+
+    C = cout total du prêt
+    T = taux d'intérêt
+"""
+benefices = []
+C = prets["remboursement"] + prets["duree"] * prets["taux"]
+
+"""
+A présent, nous souhaitons connaitre les 5 prêts sur lesquels nous produisons le plus de bénéfices. Mettez en place une solution pour les afficher :
+"""
+prets["benefices"] = C
+print(prets.sort_values('benefices', ascending=False).head(5))
+
+
+"""
+En résumé
+
+    On peut sélectionner une ou plusieurs colonnes d’un data frame via la syntaxe  mon_dataframe[col], où col est soit le nom de la colonne à sélectionner 
+    (lorsqu’il n'y en a qu’une), soit une liste de noms de colonnes (lorsqu’il y en a plusieurs).
+
+    Une colonne d’un data frame est une Series Pandas.
+
+    De nombreuses manipulations sont possibles avec/via des Series ; on peut notamment :
+
+        modifier, ajouter ou supprimer une colonne ;
+
+        modifier le nom d’une colonne via la méthode.rename() ;
+
+        changer le type d’une colonne via la méthode.astype() ;
+
+        trier un data frame via la méthode.sort_values() .
+
+Je vous propose à présent de voir comment filtrer les lignes pour avoir un contrôle total sur notre data frame.
+"""
