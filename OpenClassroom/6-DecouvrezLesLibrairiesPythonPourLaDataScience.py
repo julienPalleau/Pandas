@@ -69,6 +69,8 @@ C’est à première vue très simple, mais nous allons voir que cette syntaxe p
 méthode qui pourra répondre à près de 90 % de vos besoins en termes de sélection d’une partie de vos données. La source de ce chiffre ? OK, c’est un avis totalement personnel ! 
 Mais laissez-moi vous montrer pourquoi je suis aussi sûr de moi.
 
+https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857549-filtrez-les-donnees-du-data-frame#/id/video_Player_1
+
 Une autre option de la méthode .loc est la sélection par index. Avant d’aller plus loin sur cet aspect, laissez-moi redéfinir la différence entre des index et des indices ! 
 Les indices, comme nous l’avons vu plus haut, sont la position intrinsèque d’un élément au sein d’un tableau. Les index, en revanche, correspondent à une valeur qui est associée à 
 chaque ligne. C’est ce que vous voyez sur la gauche de votre data frame :
@@ -93,8 +95,8 @@ Parce qu’il est possible de faire une sélection au sein d’un data frame sel
 
 Faites le test avec les lignes suivantes :
 """
-print(clients.loc[0:10, :])
-print(clients.iloc[0:10, :])
+# print(clients.loc[0:10, :])
+# print(clients.iloc[0:10, :])
 
 """
 Il est d’ailleurs possible d’accéder à la liste des index d’un data frame via l’attribut.index . Par exemple,clients.indexnous renverra l’ensemble des index de notre data frame.
@@ -102,7 +104,100 @@ Il est d’ailleurs possible d’accéder à la liste des index d’un data fram
 Il est parfois intéressant, après avoir effectué certaines opérations, de réinitialiser ces index – nous verrons un exemple concret, dans la prochaine section, où cela est même 
 nécessaire. C’est possible via la méthode.reset_index() :
 """
-# Creation d'un data frame trie pour desordonner les Index
+# # Creation d'un data frame trie pour desordonner les Index :
+# print("\n")
+# df_temp = clients.sort_values('nom')
+# print(f"Creation d'un data frame trie pour desordonner les Index: \n{df_temp}")
+# print("\n")
+# # reset_index:
+# print(f"Reset index: \n{df_temp.reset_index()}")
+# print("\n")
+# # reset_index sans garder les anciens Index :
+# print(f"reset_index sans garder les anciens Index : \n{df_temp.reset_index(drop=True)}")
+
+##########################
+# Modifiez une sélection #
+##########################
+# https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857549-filtrez-les-donnees-du-data-frame#/id/r-7857548
+"""
+Comme avec les colonnes, on peut utiliser les méthodes.iloc  ou  .loc pour modifier un data frame existant. C’est même encore plus intéressant que ce que nous avions vu jusque-là, 
+car il est possible de modifier précisément une partie d’un data frame. Je vous propose de voir tout cela ensemble en vidéo :
+https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857549-filtrez-les-donnees-du-data-frame#/id/video_Player_2
+"""
+
+############
+# Exercice #
+###########
+"""
+Contexte
+
+Certaines demandes ont été spécifiquement formulées par le responsable du service Prêt de notre établissement. Il souhaite que vous puissiez appliquer les traitements nécessaires 
+pour lui donner des réponses précises.
+Consignes
+
+Vous allez devoir mettre en application l’ensemble des processus de sélection présentés ci-dessus, pour répondre à ces différentes demandes :
+
+    Le taux d’endettement autorisé est de 35 %. Pourriez-vous me communiquer le nombre de personnes ayant dépassé ce seuil ?
+
+    Même question, mais cette fois-ci uniquement sur l’agence parisienne.
+
+    Pour faciliter le traitement d’éventuelles futures demandes de prêts, pourriez-vous ajouter une variable nommée risque, qui nous permettrait d’identifier facilement les 
+    clients à risque ?
+
+    Combien de prêts automobiles ont été accordés ? Quel est le coût total moyen de ceux-ci ?
+
+    Quel est le bénéfice mensuel total réalisé par l’agence toulousaine ? 
+
+Vous êtes prêt ? C'est parti pour l'exercice !
+"""
+print("Exercice: ")
+import numpy as np
+import pandas as pd
+
+# traitement réalisé précédemment
+prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv')
 print("\n")
-df_temp = clients.sort_values('nom')
-print(f"Creation d'un data frame trie pour desordonner les Index: \n{df_temp}")
+# calcul du taux d'endettement
+prets['taux_endettement'] = round(prets['remboursement'] * 100 / prets['revenu'], 2)
+
+# renommer taux en taux_interet
+prets.rename(columns={'taux': 'taux_interet'}, inplace=True)
+
+# calculer le cout total du pret
+prets['cout_total'] = prets['remboursement'] * prets['duree']
+
+# calculer les bénéfices mensuels réalisés
+prets['benefices'] = round((prets['cout_total'] * prets['taux_interet'] / 100) / (24), 2)
+
+print(prets.head())
+
+"""
+Le taux d’endettement autorisé est de 35%. Pourriez vous me communiquer le nombre de personnes ayant dépassé ce seuil ? vous pourrez me stocker la liste dans une variable à part 
+nommé clients_risque
+"""
+print("\n")
+nombre_client_risque = prets.loc[prets['taux_endettement'] > 35, :].shape[0]
+print(f'Il y a', nombre_client_risque, 'client qui ont depasse le seuil autorise')
+
+"""
+Même question, mais cette fois ci uniquement sur l’agence Parisienne
+"""
+print("\n")
+nombre_client_risque = prets.loc[(prets['taux_endettement'] > 35) & (prets['ville'] == 'PARIS')].shape[0]
+print(f"Même question, mais cette fois ci uniquement sur l’agence Parisienne {nombre_client_risque}")
+
+"""
+Pour faciliter le traitement d’éventuelles futures demandes de prêts, pourriez vous ajouter une variable nommée risque qui aurait pour valeur Oui si le client est risqué 
+(taux d’endettement > 35%), Non sinon. Pour se faire, je vous conseille de créer la variable risque en l'initialisant à Non (ou Oui, à votre préférence) et de ne modifier que les 
+lignes concernées par la valeur inverse :
+"""
+prets['risque'] = 'Non'
+print(prets)
+prets.loc[prets['taux_endettement'] > 35, 'risque'] = "Oui"
+print(prets)
+
+"""
+Combien de prêts automobiles ont été accordés ? Quel est le coût total moyen de ces derniers ?
+"""
+prets_auto = prets.loc[prets['type'] == 'automobile', :]
+print('Nous avons accorde', prets_auto.shape[0], 'prets automobiles, dont le cout total moyen est de', prets_auto['cout_total'].mean(), '€')
