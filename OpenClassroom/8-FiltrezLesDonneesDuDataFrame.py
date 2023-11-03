@@ -115,6 +115,7 @@ nécessaire. C’est possible via la méthode.reset_index() :
 # # reset_index sans garder les anciens Index :
 # print(f"reset_index sans garder les anciens Index : \n{df_temp.reset_index(drop=True)}")
 
+
 ##########################
 # Modifiez une sélection #
 ##########################
@@ -124,6 +125,24 @@ Comme avec les colonnes, on peut utiliser les méthodes.iloc  ou  .loc pour modi
 car il est possible de modifier précisément une partie d’un data frame. Je vous propose de voir tout cela ensemble en vidéo :
 https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857549-filtrez-les-donnees-du-data-frame#/id/video_Player_2
 """
+
+#############
+# En resume #
+#############
+"""
++ Il existe deux méthodes pour sélectionner précisément des éléments au sein d’un data frame : 
+    + La méthode.iloc permet de sélectionner à partir des indices. La syntaxe est :  mon_dataframe.iloc[ indice(s) ligne ,  indice(s) colonne ]  .
+    + La méthode.loc permet de sélectionner à partir de conditions et des noms de colonnes. La syntaxe est :  mon_dataframe.loc[ condition sur les lignes ,  colonne(s) ]  .
+
++ La condition sur les lignes est une condition qui va être testée sur chaque ligne. Une ligne est conservée dans le processus de sélection si elle satisfait à cette condition. 
+Cette condition peut être une conjonction de plusieurs conditions séparées par des "et" logiques (& ) ou des "ou" logiques (| ).
+
++ Les index sont des valeurs qui sont associées intrinsèquement à chaque ligne. Si on effectue un tri ou toute autre opération, une ligne, quelle que soit sa position dans le data 
+frame, aura toujours le même index. Il est possible de réinitialiser ce dernier via la méthode  .reset_index .
+
++ La méthode.loc peut être également utilisée pour modifier la partie du data frame sélectionnée. 
+"""
+
 
 ############
 # Exercice #
@@ -201,3 +220,10 @@ Combien de prêts automobiles ont été accordés ? Quel est le coût total moye
 """
 prets_auto = prets.loc[prets['type'] == 'automobile', :]
 print('Nous avons accorde', prets_auto.shape[0], 'prets automobiles, dont le cout total moyen est de', prets_auto['cout_total'].mean(), '€')
+
+"""
+Quel est le bénéfice mensuel total réalisé par l’agence Toulousaine ?
+"""
+print("\n")
+benefice_total = prets.loc[prets['ville'] == 'TOULOUSE', :]
+print(f"Quel est le bénéfice mensuel total réalisé par l’agence Toulousaine ?\n{benefice_total['benefices'].sum().round(2)}€")

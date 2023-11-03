@@ -1,17 +1,11 @@
+import numpy as np
 import pandas as pd
 import requests
 
-# pd.set_option('display.max_columns', 1000, 'display.width', 1000, 'display.max_rows', 1000)
-# data = pd.read_csv("clients.csv")
-#
-# print(data.columns)
-# print(data.iloc[10:20, 1: 3])
-# print(data.iloc[10:20, [1, 3]])
+b = np.array([[[1, 2],[4, 5]],
 
-response = requests.get('https://www.google.com/')
-if not len(response.text.strip()) > 0:
-    print(f"La variable request est vide.")
-else:
-    print(f"La variable request n'est pas vide.")
+        [[6, 7],[8, 9]],
 
-print(response.text)
+        [[10, 11],[12, 13]]])
+
+print(b.shape)

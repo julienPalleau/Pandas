@@ -100,3 +100,26 @@ print(f"Salaire apres augmentation: {revenus[revenus==1600]}")
 # indice = np.where(revenus == 1400)[0][0]
 # revenus[indice] += 200
 # print(revenus[indice])
+
+#############
+# En resume #
+#############
+# https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7856832-creez-vos-premiers-arrays-avec-numpy#/id/r-7856831
+"""
+    NumPy (pour Numerical Python) est une librairie Python permettant de manipuler et d’effectuer rapidement et simplement de nombreuses opérations mathématiques sur un tableau 
+    de données.
+
+    Les données sont stockées dans une structure similaire à une liste Python, un tableau NumPy, ou array.
+
+    Ce dernier, contrairement à une liste, est obligatoirement monotype.
+
+    On peut sélectionner au sein d’un array :
+
+        un élément via son indice avec l’écriture :  nom_array[indice]  ;
+
+        plusieurs éléments contigus via la syntaxe :  nom_array[début:fin:pas]  ;
+
+        certains éléments spécifiques via une condition :  nom_array[condition]  .
+
+    Les arrays possèdent de nombreuses méthodes permettant de les manipuler ou d'effectuer des opérations mathématiques, de façon très simple.
+"""

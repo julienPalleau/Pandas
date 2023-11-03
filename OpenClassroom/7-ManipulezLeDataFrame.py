@@ -6,6 +6,17 @@ import pandas as pd
 data = pd.read_csv("clients.csv")
 
 print("""
+###########################
+# Manipulez le data frame #
+###########################
+Nous avons importé notre premier data frame… mais c’est loin d’être le dernier. Une fois nos données correctement importées, la suite logique va être de les manipuler à notre 
+guise.
+
+Voici un cas concret : nous souhaitons accéder à la liste de tous les e-mails des clients ayant contracté un prêt chez nous, à partir du data frameclients importé lors du chapitre 
+précédent, pour créer une liste de diffusion pour des offres commerciales préférentielles. Comment faire cela avec Pandas ? C’est que je vous propose de voir à présent !
+""")
+
+print("""
 ###############################
 # Naviguez dans le data frame #
 ###############################
@@ -227,9 +238,10 @@ prets["benefices"] = C
 print(prets.sort_values('benefices', ascending=False).head(5))
 
 
+#############
+# En résumé #
+#############
 """
-En résumé
-
     On peut sélectionner une ou plusieurs colonnes d’un data frame via la syntaxe  mon_dataframe[col], où col est soit le nom de la colonne à sélectionner 
     (lorsqu’il n'y en a qu’une), soit une liste de noms de colonnes (lorsqu’il y en a plusieurs).
 
