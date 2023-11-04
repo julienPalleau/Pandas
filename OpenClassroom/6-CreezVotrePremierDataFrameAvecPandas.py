@@ -4,7 +4,7 @@
 # Creez votre premier data frame avec Pandas #
 ##############################################
 # https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857178-creez-votre-premier-data-frame-avec-pandas#/id/video_Player_1
-
+import pandas as pd
 pd.set_option('display.max_columns', 1000, 'display.width', 1000, 'display.max_rows', 1000)
 
 #################################
@@ -108,7 +108,7 @@ Si vous cherchez à afficher plus de 60 lignes, vous aurez finalement comme rés
 
 Voici quelques exemples :
 """
-import pandas as pd
+
 
 # Chargement du fichier
 data = pd.read_csv("clients.csv")
