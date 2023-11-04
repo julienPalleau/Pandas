@@ -12,6 +12,9 @@ C’est ce que je vous propose de découvrir !
 # Comprenez l'interet de la fusion de donnees #
 ###############################################
 # https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857932-fusionnez-des-donnees-avec-pandas#/id/r-7857771
+import pandas as pd
+pd.set_option('display.max_columns', 1000, 'display.width', 1000, 'display.max_rows', 1000)
+
 """
 Dans une banque, les sources de données peuvent être multiples. Nous avons déjà notre liste de clients d’une part, et la liste des prêts fournie par le service adéquat au sein de notre établissement. Mais il peut y avoir bien d’autres choses ! On peut imaginer notamment :
     + les informations issues de la navigation des clients sur le site web ;
@@ -79,14 +82,17 @@ dans lequel nous plaçons nos data frames au sein dumerge  .
 
 Voici 3 exemples de jointures :
 """
+clients = pd.read_csv("clients.csv")
+prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv')
+
 # jointure entre 2 dataframes A et B
-pd.merge(A, B, on='id')
+# pd.merge(A, B, on='id')
 
 # jointure entre 2 dataframes A et C
-C.merge(A, left_on='identifiant', right_on='id')
+# C.merge(A, left_on='identifiant', right_on='id')
 
 # jointure entre 2 dataframes A et B
-pd.merge(A, B, left_on='id', right_on='identifiant')
+# pd.merge(A, B, left_on='id', right_on='identifiant')
 
 """
 Décomposons chaque cas :
@@ -104,9 +110,10 @@ Je vous propose à présent de joindre nos deux data framesprêts  et  clients d
 La clé commune à chaque data frame est l’identifiant, c’est donc ce que nous utiliserons comme clé pour effectuer notre jointure :
 """
 data = pd.merge(clients, prets, on='identifiant')
-display(data)
+print(data)
 
 """
+https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857932-fusionnez-des-donnees-avec-pandas#/id/r-7859336
 Voilà ! Nous avons à présent un super data frame contenant TOUTES nos informat… Hop hop hop, pas si vite ! 
 
 Vous ne l’avez peut-être pas remarqué, mais nous avons perdu des informations de prêts lors de notre jointure. En effet, nous avions 244 prêts attribués et répertoriés dans le 
@@ -217,8 +224,8 @@ et d’utiliser la fonction concat sur cette liste.
 
 Par exemple, voilà comment procéder avec deux data frames, df1  et  df2 :
 """
-liste_concat = [df1, df2]
-pd.concat(liste_concat)
+# liste_concat = [df1, df2]
+# pd.concat(liste_concat)
 
 """
 Le souci d’une concaténation, c’est qu’elle ne gère pas du tout les index par défaut. L’opération met juste le second data frame à la suite du premier, 
