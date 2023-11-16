@@ -1,4 +1,5 @@
 # https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857932-fusionnez-des-donnees-avec-pandas
+# https://realpython.com/pandas-groupby/
 
 #####################################
 # Fusionnez des donnees avec Pandas #
@@ -82,8 +83,8 @@ dans lequel nous plaçons nos data frames au sein dumerge  .
 
 Voici 3 exemples de jointures :
 """
-clients = pd.read_csv("clients.csv")
-prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv')
+# clients = pd.read_csv("clients.csv")
+# prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv')
 
 # jointure entre 2 dataframes A et B
 # pd.merge(A, B, on='id')
@@ -109,8 +110,8 @@ Décomposons chaque cas :
 Je vous propose à présent de joindre nos deux data framesprêts  et  clients dans un nouveau data frame nommé très originalement…  data . 
 La clé commune à chaque data frame est l’identifiant, c’est donc ce que nous utiliserons comme clé pour effectuer notre jointure :
 """
-data = pd.merge(clients, prets, on='identifiant')
-print(data)
+# data = pd.merge(clients, prets, on='identifiant')
+# print(data)
 
 """
 https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7857932-fusionnez-des-donnees-avec-pandas#/id/r-7859336
@@ -246,6 +247,95 @@ Votre tâche cette fois-ci va être de rassembler ces différents fichiers pour 
 Pour cela, vous devez utiliser l’ensemble des jeux de données à votre disposition (les deux fichiers clients et le fichier de prêts), 
 et appliquer les différentes méthodes Pandas présentées dans cette partie, pour les fusionner.
 """
+
+############
+# Exercice #
+############
+"""
+Fusionnez des données avec Pandas
+
+Votre tâche cette fois-ci va être de construire un jeu de données qui soit le plus complet possible. Pour cela, vous devez utiliser l’ensemble des 
+jeux de données à votre disposition (les deux fichiers clients et le fichier de prêts) et appliquer l’ensemble des méthodes pour les fusionner ensemble.
+"""
+import numpy as np
+
+# traitement réalisés précédemment
+prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv')
+
+# calcul du taux d'endettement
+prets['taux_endettement'] = round(prets['remboursement'] * 100 / prets['revenu'], 2)
+
+# renommer taux en taux_interet
+prets.rename(columns={'taux':'taux_interet'}, inplace=True)
+
+# calculer le cout total du pret
+prets['cout_total'] = prets['remboursement'] * prets['duree']
+
+# calculer les bénéfices mensuels réalisés
+prets['benefices'] = round((prets['cout_total'] * prets['taux_interet']/100)/(24), 2)
+
+# création d'une variable risque
+prets['risque'] = 'Non'
+prets.loc[prets['taux_endettement'] > 35, 'risque'] = 'Oui'
+
+# dataframe de profils clients
+profil_clients = prets.groupby('identifiant')[['remboursement','taux_endettement','cout_total','benefices']].sum()
+profil_clients.reset_index(inplace=True)
+profil_clients.head()
+print(prets.head())
+
+"""
+Dans un premier temps, importons les deux fichiers clients : 
+"""
+clients_1 = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/clients.csv')
+print("\n")
+print(f"client_1: {clients_1.head()}")
+
+clients_2 = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/clients_suite.csv')
+print("\n")
+print(f"client_2: {clients_2.head()}")
+
+"""
+La première mission va être de rassembler les deux dataframes clients_1 et clients_2 en un gros dataframe clients qui contiendra l'ensemble des informations de notre clientèle !
+"""
+clients = pd.concat([clients_1, clients_2], ignore_index=True)
+print("\n")
+print(f"clients: {clients}")
+
+"""
+Ajoutez l'information de l'age au dataframe data. Cependant, il semble que certains des clients ayant contracté un prêt n'apparaissent pas dans ce fichier. On souhaite cependant 
+garder toutes les informations de notre dataframe data : choisissez donc avec précaution les arguments !
+"""
+data = pd.merge(profil_clients, clients, on='identifiant')
+print(data)
+
+"""
+Le service marketing de la banque nous a fourni un fichier dans lequel se trouve l'age de TOUS les clients de notre banque.
+"""
+clients_age = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/client_age.csv')
+print(clients_age)
+
+"""
+Ajoutez l'information de l'age au dataframe data. Cependant, il semble que certains des clients ayant contracté un prêt n'apparaissent pas dans ce fichier. On souhaite cependant 
+garder toutes les informations de notre dataframe data : choisissez donc avec précaution les arguments !
+"""
+notes = pd.read_csv('notes.csv')
+print(notes)
+
+moyenne = notes.groupby('nom').agg({'note': 'mean'}).to_numpy()
+num = 0
+for i in moyenne[:,0]:
+    if i < 10:
+       num += 1
+print(f"nombre de notes en dessous de la moyenne {num}")
+
+
+
+
+
+
+# print("\n")
+# print(df.loc[((df['matiere'] == 'Mathématiques') | (df['matiere'] == 'Physique/Chimie')) & (df['note'] >= 15), 'nom'])
 
 #############
 # En resume #
