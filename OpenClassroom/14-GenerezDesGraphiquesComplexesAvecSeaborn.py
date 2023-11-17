@@ -5,6 +5,7 @@
 Matplotlib offre de nombreuses options pour personnaliser un graphique de A à Z ! Mais il est parfois laborieux de modifier des éléments spécifiques pour obtenir une belle
 représentation. De plus, une petite modification peut très vite devenir plusieurs lignes de codes si on n'y prend pas garde.
 """
+import matplotlib.pyplot as plt
 
 ####################################
 # Identifiez quand utliser Seaborn #
@@ -48,7 +49,7 @@ Voilà comment l'utiliser:
 import pandas as pd
 import seaborn as sns
 pd.set_option('display.max_columns', 1000, 'display.width', 1000, 'display.max_rows', 1000)
-prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv')
+prets = pd.read_csv('https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets_final.csv')
 prets.rename(columns={"taux": "taux_endettement"}, inplace=True)
 sns.scatterplot(data=prets, x='revenu', y='taux_endettement')
 
@@ -60,7 +61,8 @@ Explicitons un peu son fonctionnement:
 Et le réel intérêt de Seaborn apparaît lorqu'on essaie d'ajouter des dimensions supplémentaires, comme des couleurs ou des tailles de points.
 Reprenons le même graphique en ajoutant en couleur le type de graphique tracé. Là où on avait besoin d'une boucle avec Matplotlib, voilà le code avec Seaborn:
 """
-sns.scatterplot(data=prets, x='revenu', y='taux_endettement', hue='type')
+# sns.scatterplot(data=prets, x='revenu', y='taux_endettement', hue='type')
+# plt.show()
 """
 ... pour obtenir:
 https://openclassrooms.com/fr/courses/7771531-decouvrez-les-librairies-python-pour-la-data-science/7858539-generez-des-graphiques-complexes-avec-seaborn#/id/r-7867564
@@ -69,8 +71,24 @@ En précisant la variable via l'argument hue, Seaborn crée automatiquement une 
 A présent, plutôt que l'information du type de prêt, on souhaite ajouter l'information de la durée du prêt. On peut faire cela en associant la taille d'un point à la durée
 d'un prêt:
 """
-sns.scatterplot(data=prets, x='revenu', y='taux_endettement', size='duree')
+# sns.scatterplot(data=prets, x='revenu', y='taux_endettement', size='duree')
+# plt.show()
 
 """
+Le nombre d'informations à afficher n'est pas limité, on pourrait très bien mixer la couleur avec la taille des points ! Cependant, attention à ne pas sacrifier la clareté et la
+lisibilité d'un graphique en voulant y ajouter trop d'informatons.
 
+Pour finaliser ce graphique, on peut utliser les différentses fonctions de Matplotlib vues précdémment:
 """
+plt.figure(figsize=(15, 6))
+# plt.rcParams.update({'font.size': 14})
+
+sns.scatterplot(data=prets, x='revenu', y='taux_endettement', hue='type')
+plt.ylabel("Taux d'endettement")
+plt.xlabel("Revenu mensuel (€)")
+plt.grid()
+plt.xlim(500, 7500)
+plt.legend(bbox_to_anchor=(1, 1.02))
+plt.title("Taux d'endettement en fonction du revenu mensuel\npar type de prêt contracté")
+plt.show()
+

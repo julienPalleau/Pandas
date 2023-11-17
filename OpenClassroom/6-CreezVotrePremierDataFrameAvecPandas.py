@@ -112,6 +112,15 @@ Voici quelques exemples :
 
 # Chargement du fichier
 data = pd.read_csv("clients.csv")
+print(data)
+"""
+https://www.youtube.com/watch?v=pz_0lRCrlNw&list=PLj6YeMhvp2S6gDMYrkDb81vneeuk_Lf3v&index=5
+Quantité de mémoire utilisé par mon dataFrame
+Si je ne veux pas charger toutes les colonnes car mon dataFrame est trop gros
+"""
+print(data.info(memory_usage='deep'))
+data_2 = pd.read_csv("clients.csv", usecols=['email', 'nom'])
+print(data_2)
 
 # afficher les 5 premieres lignes
 print(data.head())
@@ -152,6 +161,7 @@ Au-delà des dimensions, on peut avoir envie de connaître les types de chacune 
 """
 print(f"Connaitre les types d'un data frame data.dtypes: {data.dtypes}")
 # En Pandas le type objet correspond en fait à une colonne de type chaine de caractere (ou string).
+
 
 print(data.dtypes)
 """

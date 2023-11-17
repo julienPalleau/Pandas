@@ -195,6 +195,7 @@ Commençons par importer notre fichier csv. Celui ci sera disponible via un lien
 celui que vous pouvez télécharger sur le lien suivant (click droit, enregistrer sous)
 """
 prets = pd.read_csv("https://raw.githubusercontent.com/OpenClassrooms-Student-Center/fr-4452741-decouvrez-les-librairies-python-pour-la-data-science/main/data/prets.csv")
+print(prets.info(memory_usage='deep'))
 print(prets.head())
 
 print("\n")
