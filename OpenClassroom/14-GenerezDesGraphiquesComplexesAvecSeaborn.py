@@ -80,15 +80,79 @@ lisibilité d'un graphique en voulant y ajouter trop d'informatons.
 
 Pour finaliser ce graphique, on peut utliser les différentses fonctions de Matplotlib vues précdémment:
 """
-plt.figure(figsize=(15, 6))
-# plt.rcParams.update({'font.size': 14})
+# plt.figure(figsize=(15, 6))
+# # plt.rcParams.update({'font.size': 14})
+#
+# sns.scatterplot(data=prets, x='revenu', y='taux_endettement', hue='type')
+# plt.ylabel("Taux d'endettement")
+# plt.xlabel("Revenu mensuel (€)")
+# plt.grid()
+# plt.xlim(500, 7500)
+# plt.legend(bbox_to_anchor=(1, 1.02))
+# plt.title("Taux d'endettement en fonction du revenu mensuel\npar type de prêt contracté")
+# plt.show()
+"""
+Explicitons les differentes fonctions utilisees:
+    1.  La fonction rcParams.update, avec l'argument font.size, définit pour tous les graphiques - et non pas uniquement le graphique actuel - la taille de la police de tous les
+        éléments (xlabel, title, legend, etc...) à 14.
+    2.  grid permet d'afficher le quadrillage.
+    3.  Via la fonction xlim, on fixe les limites des graduations de 500 à 7 500.
+    4.  La fonction legend affiche la légende sur le graphique. La petite nouveauté ici est l'utilisation de l'argument bbox_to_anchor permettant de fixer la position de la légende
+        en dehors du graphique, aux coordonnées renseignées.  
+        
+Agrégez des données avec Seaborn
+Reprenons à présent le diagramme à barres du chiffre d'affaires par agence, réalisé précédemment. Avec Matplotlib, avant de tracer ce dernier, on avait eu besoin au préalable 
+d'agréger nos données. La fonction barplot de Seaborn nous permet de réaliser cette étape directement à l'intérieur du graphique:
+"""
 
-sns.scatterplot(data=prets, x='revenu', y='taux_endettement', hue='type')
-plt.ylabel("Taux d'endettement")
-plt.xlabel("Revenu mensuel (€)")
-plt.grid()
-plt.xlim(500, 7500)
-plt.legend(bbox_to_anchor=(1, 1.02))
-plt.title("Taux d'endettement en fonction du revenu mensuel\npar type de prêt contracté")
+# sns.barplot(data=prets, x='ville', y='remboursement', ci=None, estimator=sum)
+# plt.show()
+
+"""
+Le début est similaire à ce que nous avions vu avec la fonction scatterplot, mais nous découvrons ici deux nouveaux arguments:
+    +   ci, pour confidence interval (ou intervalle de confiance), qui ajoute les intervalles de confiance à chaque barre. Fixer cet argument à None permet de les faire disparaître
+        ci is deprecated, use errorbar=None instead;
+    +   estimator correspond à la fonction d'agrégation.
+Tous les arguments vus précédemment fonctionnent également, notamment avoir des sous-groupes - par exemple : par type de prêt - en couleur:
+"""
+# import numpy as np
+# # sns.barplot(data=prets, x='ville', y='remboursement', ci=None, estimator=np.mean, hue='type')
+# sns.barplot(data=prets, x='ville', y='remboursement', errorbar=None, estimator=np.mean, hue='type')
+# plt.show()
+
+"""
+Seaborn possède de nombreuses fonctions (plus d'une vingtaine) pour répondre à toutes les ituations possibles en termes de visualisation. Vous pouvez trouver la liste exhaustive 
+sur la documentation officielle(https://seaborn.pydata.org/api.html). Mais pour en citer quelques-unes rapidement:
+    +   lineplot pour tracer des courbes;
+    +   boxplot pour des boîtes à moustaches;
+    +   histplot pour des histogrammes;
+    +   kdeplot pour un graphique à densité;
+    +   pairplot pour tracer l'ensemble des variable numériques deux à deux, sur un seul graphique !
+
+N'hésitez pas à tester toutes ces fonctions de votre côté pour apprécier la plus-value apportée par Seaborn.
+
+Améliorez l'aspect graphique de vos visualisations
+Seabon apporte un vrai plus esthétique par rapport à Matplotlib grâce aux palettes graphiques et aux thèmes.
+
+Les palettes graphiques
+Les palettes graphiques correspondent à un ensemble de couleurs qui vont être utilisées dans plusieurs palettes, utilisables à votre buise, qui sont particulièrement harmonieuse.
+
+Pour fixer une nouvelle palette, on utilise la fonction set_palette de Seaborn. Donnons à notre graphique un aspect un peu plus pastel:
+"""
+import numpy as np
+# sns.barplot(data=prets, x='ville', y='remboursement', ci=None, estimator=np.mean, hue='type')
+sns.barplot(data=prets, x='ville', y='remboursement', errorbar=None, estimator=np.mean, hue='type')
+
+### doesn't work ###
+sns.set_theme(style='whitegrid', palette='pastel')
+sns.color_palette("mako", as_cmap=True)
+###
+
 plt.show()
+
+
+"""
+Vous pourrez retrouver toutes les informations concernant les différentes palettes possibles, directement sur la page de couleurs correspondante 
+(https://seaborn.pydata.org/tutorial/color_palettes.html?highlight=color).
+"""
 
