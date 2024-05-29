@@ -6,15 +6,15 @@ alcohool = alcohool.squeeze('columns')
 
 '''
 Exercice 1
-Select all the countries from alcohool that have more than 50 wine servings, and save them (and the corresponding values) in a variable fifty_plus.
+Select all the countries from alcohol that have more than 50 wine servings, and save them (and the corresponding values) in a variable fifty_plus.
 '''
 print()
 print("exercice 1")
-fifty_plus = alcohool[alcohool > 50]
+fifty_plus = alcohol[alcohol > 50]
 print(fifty_plus)
 
 # Solution 1
-# fifty_plus = alcohool[alcohool > 50]
+# fifty_plus = alcohol[alcohol > 50]
 
 '''
 Exercice 2
