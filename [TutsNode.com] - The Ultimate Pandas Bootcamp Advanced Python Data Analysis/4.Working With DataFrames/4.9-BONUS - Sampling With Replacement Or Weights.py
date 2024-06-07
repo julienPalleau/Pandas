@@ -20,14 +20,6 @@ Another way to says this is that sampling with replacement makes it possible to 
 This is also known as bootstrapping in statistics. 
 So let's see how we can do with or without replacement sampling, with or without replacement.
 '''
-# with or without replacement
-import io
-import pandas as pd
-import requests
-
-desired_width=320
-pd.set_option('display.width', desired_width)
-pd.set_option('display.max_columns',50)
 
 '''
 Let's introduce a nifty way which will use to conveniently take random smaples from our dataset. 
