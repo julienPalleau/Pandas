@@ -8,7 +8,7 @@ married = [False, True, True, True, False, True]
 
 # To create a DataFrame from lists, you have to bear in mind that lists need to be equal length !!!
 df = pd.DataFrame({'name': names, 'age': ages, 'married': married})
-print(f"Data Frame created with 3 list with same length !!! {df}")
+print(f"Data Frame created with 3 list with same length !!!\n {df}")
 print()
 print(f"longueur de names: {len(names)}")
 new_names = names + ['Ryan']
